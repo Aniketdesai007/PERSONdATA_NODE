@@ -1,5 +1,8 @@
 const mongoose= require('mongoose');
-mongoose.connect('mongodb://localhost:27017/NEWdata');
+require('dotenv').config();
+const url=process.env.url;
+
+mongoose.connect(url);
 const db=mongoose.connection;
 
 
