@@ -17,7 +17,7 @@ router.post('/person',async (req, res) =>{
     }
 
 })
-router.patch('/person/:id',async (req, res) =>{
+router.put('/person/:id',async (req, res) =>{
     try {
          const id=req.params.id;
     const data=req.body;
