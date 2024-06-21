@@ -1,8 +1,8 @@
 const mongoose= require('mongoose');
-require('dotenv').config();
-const url=process.env.url;
+// require('dotenv').config();
+// const url=process.env.url;
 
-mongoose.connect(url);
+mongoose.connect("mongodb+srv://Aniket:Aniket12345@cluster0.cpkm9m0.mongodb.net/");
 const db=mongoose.connection;
 
 
