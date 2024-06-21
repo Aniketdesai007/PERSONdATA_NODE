@@ -6,7 +6,7 @@ const Personrouter=require('./PersonRouter');
 // const passport=require('passport');
 // const localstrategy=require('passport-local').Strategy;
 require('dotenv').config();
-// const port=process.env.port || 800;
+const port=process.env.port || 800;
 // const logrequest=(req,res,next)=>{
 //     console.log(`${new Date().toLocaleString()} request made to :${req.originalUrl}`);
 //     next();
@@ -23,6 +23,6 @@ app.get('/', (req, res) =>{
 app.use('/',Personrouter);
 
 
-app.listen(800,()=>{
+app.listen(port,()=>{
     console.log('Server is running on port 800');
 })
