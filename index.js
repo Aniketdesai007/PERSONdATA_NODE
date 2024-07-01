@@ -9,8 +9,8 @@ const dataschema = require('./database/DataSchema.js')
 
 
 require('dotenv').config();
-const logrequest=(rreq,res,next) => {
-    console.log(`[${new Date().toLocaleString()}] with url ${rreq.url}`);
+const logrequest=(req,res,next) => {
+    console.log(`[${new Date().toLocaleString()}] with url ${req.url}`);
     next();
 }
 const port=process.env.port || 800;
@@ -19,10 +19,11 @@ app.use(bodyparser.json());
 app.use(passport.initialize());
 
 
-app.get('/',passport.authenticate('local',{session:false}), (req, res) =>{
+app.get('/',logrequest, (req, res) =>{
     res.send('ssuccfully authenticated.........');
 })
-app.use('/person',logrequest,Personrouter);
+
+app.use('/person',passport.authenticate('local',{session:false}),Personrouter);
 
 
 app.listen(port,()=>{

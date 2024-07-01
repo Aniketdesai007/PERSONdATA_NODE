@@ -35,15 +35,23 @@ const Personschema=new mongoose.Schema({
         required:true
     }
 })
+Personschema.methods.Compare=async function(candidatepassword){
+    try {
+        // const pass=this
+        const isMatch=await bcrypt.compare(candidatepassword,this.password)
+        return isMatch;
+    } catch (error) {
+        throw(error);
+    }
 
-
-
-
-Personschema.pre('save',async(next)=>{
-const person=this;
-if(!(person.isMatch('password'))){
-     return next();
 }
+
+
+
+
+Personschema.pre('save',async function(next){
+const person=this;
+if(!person.isModified('password'))return next();
     try {
         //hash password genertion
         const salt=await bcrypt.genSalt(10);
@@ -58,15 +66,6 @@ if(!(person.isMatch('password'))){
         
     }
 })
-Personschema.methods.comp=async(candidatepassword)=>{
-    try {
-        // const pass=this
-        const isMatch=await bcrypt.compare(candidatepassword,this.password)
-        return isMatch;
-    } catch (error) {
-        throw(error);
-    }
 
-}
 const PersonModel=mongoose.model('PersonModel',Personschema);
 module.exports = PersonModel;
