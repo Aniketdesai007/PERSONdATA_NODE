@@ -3,7 +3,7 @@ const router=express.Router();
 const Personmodel=require('./database/DataSchema.js');
 
 
-router.post('/person',async (req, res) =>{
+router.post('/',async (req, res) =>{
     try {  
      const data=req.body;
    const newdata=new Personmodel(data);
@@ -17,7 +17,7 @@ router.post('/person',async (req, res) =>{
     }
 
 })
-router.put('/person/:id',async (req, res) =>{
+router.put('/:id',async (req, res) =>{
     try {
          const id=req.params.id;
     const data=req.body;
@@ -41,7 +41,7 @@ router.put('/person/:id',async (req, res) =>{
 
 })
 
-router.delete('/person/:id',async(req,res)=>{
+router.delete('/:id',async(req,res)=>{
     try {
         const id =req.params.id;
        const deletedata= await Personmodel.findByIdAndDelete(id);
@@ -56,8 +56,7 @@ router.delete('/person/:id',async(req,res)=>{
         console.log('errror = ',error);
     }
 })
-
-router.get('/person',async (req, res) =>{
+router.get('/',async (req, res) =>{
 try {
     const data=await Personmodel.find();
     res.status(200).json(data);
