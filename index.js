@@ -18,12 +18,13 @@ const port=process.env.port || 800;
 app.use(bodyparser.json());
 app.use(passport.initialize());
 
+const localauthmiddleware=passport.authenticate('local',{session:false});
 
 app.get('/',logrequest, (req, res) =>{
     res.send('ssuccfully authenticated.........');
 })
 
-app.use('/person',passport.authenticate('local',{session:false}),Personrouter);
+app.use('/person',Personrouter);
 
 
 app.listen(port,()=>{
